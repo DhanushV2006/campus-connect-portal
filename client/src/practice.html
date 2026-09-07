@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Student Portal </title>
+
+</head>
+
+<body>
+
+  <body class="container">
+
+    <h2>Student Performance Portal</h2>
+
+    <div class="card">
+      <h3>1. Student Summary (Variables, Types & Operators)</h3>
+
+      <button onclick="displaySummary()">Load Student Profile</button>
+
+      <div id="profileOutput" style="margin-top: 10px;">
+        Click button to display...
+      </div>
+    </div>
+
+    <script>
+
+
+    function displaySummary() {
+
+      let studentName = "Dhanush";
+
+      let marks = 85;
+
+      let enrollmentStatus = true;
+
+      let studentInfo = {
+        id: "RVU2026",
+        course: "Bsc"
+      };
+
+      let totalMarks = marks + 5;
+
+      let status = totalMarks >= 40 ? "PASS" : "FAIL";
+
+      document.getElementById("profileOutput").innerHTML =
+        "Name: " + studentName + "<br>" +
+        "Marks: " + marks + "<br>" +
+        "Total Marks: " + totalMarks + "<br>" +
+        "Enrollment Status: " + enrollmentStatus + "<br>" +
+        "Student ID: " + studentInfo.id + "<br>" +
+        "Course: " + studentInfo.course + "<br>" +
+        "Result: " + status;
+    }
+
+</script>
+
+
+</body>    
