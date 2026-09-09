@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Connect - Activity Board</title>
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo-group">
+            <div class="brand-badge">RV</div>
+
+            <div>
+                <span class="university-name">
+                    RV UNIVERSITY<sup>®</sup>
+                </span>
+
+                <p class="sub-dept">
+                    School of Computer Science & Engineering
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="exp3-container" id="mainContainer">
+
+        <nav class="exp3-top-nav">
+            <a href="index.html">← Return to Campus Connect</a>
+        </nav>
+
+        <h1 class="exp3-title">
+            📌 Campus Announcements & Task Board
+        </h1>
+
+        <p class="exp3-subtitle">
+            Manage academic notices, assignments, assessments, and placement activities in real time.
+        </p>
+
+        <section class="exp3-controls">
+
+            <input
+                type="text"
+                id="userInput"
+                class="exp3-input"
+                placeholder="Type a new notice or task..."
+            >
+
+            <button id="addBtn" class="exp3-btn" type="button">
+                Post Activity
+            </button>
+
+            <button id="toggleBtn" class="exp3-btn exp3-dark-btn" type="button">
+                Toggle Dark Mode
+            </button>
+
+        </section>
+
+        <section class="exp3-preview">
+
+            <strong>Live Activity Preview:</strong>
+
+            <span id="liveOutput" class="exp3-preview-text">
+                Start typing above to preview activity...
+            </span>
+
+        </section>
+
+        <section>
+
+            <div class="exp3-list-header">
+
+                <h2>
+                    Active Notices & Reminders
+                </h2>
+
+                <span id="itemCount" class="exp3-count">
+                    Total: 0
+                </span>
+
+            </div>
+
+            <ul id="dynamicList" class="exp3-list"></ul>
+
+        </section>
+
+    </main>
+
+    <script src="experiment3.js"></script>
+
+</body>
+</html>

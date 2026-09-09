@@ -83,7 +83,7 @@ body {
   background: linear-gradient(
     135deg,
     var(--primary-green) 0%,
-    #052e1c 100%
+    #c13048 100%
   );
   color: white;
   padding: 3.5rem 1rem;
@@ -369,4 +369,238 @@ body {
     font-size: 1.2rem;
     padding: 8px 11px;
   }
+}
+
+/* ==========================================
+   EXPERIMENT 3 - CAMPUS ACTIVITY BOARD
+   ========================================== */
+
+.exp3-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.exp3-top-nav {
+    margin-bottom: 20px;
+}
+
+.exp3-top-nav a {
+    color: var(--primary-green);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.exp3-top-nav a:hover {
+    text-decoration: underline;
+}
+
+.exp3-title {
+    color: var(--primary-green);
+    margin-bottom: 8px;
+}
+
+.exp3-subtitle {
+    color: #64748b;
+    margin-bottom: 25px;
+}
+
+.exp3-controls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.exp3-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.exp3-input:focus {
+    border-color: var(--primary-green);
+}
+
+.exp3-btn {
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.exp3-btn:hover {
+    background: #09452c;
+}
+
+.exp3-dark-btn {
+    background: #64748b;
+}
+
+.exp3-dark-btn:hover {
+    background: #475569;
+}
+
+.exp3-preview {
+    background: #f1f8f5;
+    border-left: 4px solid var(--primary-green);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+}
+
+.exp3-preview-text {
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-left: 6px;
+}
+
+.exp3-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.exp3-list-header h2 {
+    color: var(--primary-green);
+    font-size: 20px;
+}
+
+.exp3-count {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.exp3-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.exp3-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 7px;
+    transition: 0.2s;
+}
+
+.exp3-item:hover {
+    border-color: var(--primary-green);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+}
+
+.exp3-item-text {
+    flex: 1;
+    cursor: pointer;
+}
+
+.exp3-item-text.completed {
+    text-decoration: line-through;
+    color: #94a3b8;
+}
+
+.exp3-remove {
+    background: #a61c1c;
+    color: white;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.exp3-remove:hover {
+    background: #7f1515;
+}
+
+/* Dark Mode */
+
+.exp3-container.dark-theme {
+    background: #1e293b;
+    color: #f8fafc;
+}
+
+.exp3-container.dark-theme .exp3-title,
+.exp3-container.dark-theme .exp3-list-header h2 {
+    color: #8fd3b5;
+}
+
+.exp3-container.dark-theme .exp3-subtitle,
+.exp3-container.dark-theme .exp3-count {
+    color: #cbd5e1;
+}
+
+.exp3-container.dark-theme .exp3-preview {
+    background: #334155;
+    border-left-color: #8fd3b5;
+}
+
+.exp3-container.dark-theme .exp3-preview-text {
+    color: #8fd3b5;
+}
+
+.exp3-container.dark-theme .exp3-item {
+    background: #334155;
+    border-color: #475569;
+}
+
+.exp3-container.dark-theme .exp3-item:hover {
+    border-color: #8fd3b5;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .exp3-container {
+        margin: 20px;
+        padding: 22px;
+    }
+
+    .exp3-controls {
+        flex-direction: column;
+    }
+
+    .exp3-input {
+        width: 100%;
+    }
+
+    .exp3-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .exp3-container {
+        margin: 10px;
+        padding: 16px;
+    }
+
+    .exp3-title {
+        font-size: 22px;
+    }
+
+    .exp3-item {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .exp3-remove {
+        width: 100%;
+    }
 }
