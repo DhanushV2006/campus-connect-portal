@@ -604,3 +604,162 @@ body {
         width: 100%;
     }
 }
+
+/* ==========================================
+   STUDENT PORTAL
+   ========================================== */
+
+.student-portal {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.student-portal-header {
+    background: #0a2240;
+    color: white;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student-portal-header h2 {
+    margin-bottom: 5px;
+}
+
+.student-portal-header p {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.portal-back-btn {
+    background: #f2a900;
+    color: #0a2240;
+    padding: 12px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.student-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 2px solid #cbd5e1;
+}
+
+.student-tabs a {
+    padding: 18px 10px;
+    text-align: center;
+    color: #0a2240;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.student-tabs a:hover {
+    background: #eef4fb;
+}
+
+.portal-content {
+    padding: 35px;
+}
+
+.portal-content > h2 {
+    color: #0a2240;
+    margin-bottom: 25px;
+}
+
+.notice-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 25px 5px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.notice-item h3 {
+    color: #172033;
+    margin-bottom: 10px;
+}
+
+.notice-item p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.view-details-btn {
+    background: #0a2240;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.view-details-btn:hover {
+    background: #123b68;
+}
+
+@media (max-width: 768px) {
+
+    .student-portal {
+        margin: 20px;
+    }
+
+    .student-portal-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .student-tabs {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .notice-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .view-details-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .student-portal {
+        margin: 10px;
+    }
+
+    .portal-content {
+        padding: 20px;
+    }
+
+    .student-tabs {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Footer */
+.footer {
+    background-color: #0A2240;
+    color: #ffffff;
+    text-align: center;
+    padding: 18px 10px;
+    margin-top: 30px;
+    font-family: Arial, sans-serif;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 12px;
+}
+
+.footer p:last-child {
+    color: #F2A900;
+    font-size: 10px;
+}
