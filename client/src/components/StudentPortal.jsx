@@ -1,44 +1,19 @@
 import { useState } from 'react';
-import PortalTabs from './PortalTabs.jsx';
-import NoticeList from './NoticeList.jsx';
-import AssignmentList from './AssignmentList.jsx';
-import ProfileCard from './ProfileCard.jsx';
-import profileImage from "../assets/dhanush2.jpg";
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import profileImage from '../assets/dhanush2.jpg';
 
 export default function StudentPortal({ onBackToHome }) {
-
-  const [activeTab, setActiveTab] = useState('notices');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [assignments, setAssignments] = useState([
-    {
-      id: 1,
-      subject: 'CS3301 - Full Stack',
-      title: 'Lab Assignment 5',
-      status: 'Pending',
-      dueDate: 'Sept 18, 2026'
-    },
-    {
-      id: 2,
-      subject: 'CS2302 - DEEP LEARNING',
-      title: 'CIE - 1 ASSSESMENT ',
-      status: 'Submitted',
-      dueDate: 'Sept 10, 2026'
-    }
+    { id: 1, subject: 'CS3301 - Full Stack', title: 'Lab Assignment 5', status: 'Pending', dueDate: 'Sept 18, 2026' },
+    { id: 2, subject: 'CS2302 - DEEP LEARNING', title: 'CIE - 1 ASSSESMENT', status: 'Submitted', dueDate: 'Sept 10, 2026' }
   ]);
 
   const notices = [
-    {
-      id: 1,
-      title: 'Mid-Term Exam Schedule Released',
-      date: 'Sept 10, 2026',
-      dept: 'SOCSE'
-    },
-    {
-      id: 2,
-      title: 'Hackathon Registration Open',
-      date: 'Sept 20, 2026',
-      dept: 'RVU Tech Club'
-    }
+    { id: 1, title: 'Mid-Term Exam Schedule Released', date: 'Sept 10, 2026', dept: 'SOCSE' },
+    { id: 2, title: 'Hackathon Registration Open', date: 'Sept 20, 2026', dept: 'RVU Tech Club' }
   ];
 
   const student = {
@@ -51,11 +26,9 @@ export default function StudentPortal({ onBackToHome }) {
   };
 
   const handleAssignmentSubmit = (id) => {
-    setAssignments((currentAssignments) =>
-      currentAssignments.map((assignment) =>
-        assignment.id === id
-          ? { ...assignment, status: 'Submitted' }
-          : assignment
+    setAssignments(currentAssignments =>
+      currentAssignments.map(item =>
+        item.id === id ? { ...item, status: 'Submitted' } : item
       )
     );
   };
@@ -64,114 +37,171 @@ export default function StudentPortal({ onBackToHome }) {
     <div style={styles.container}>
 
       <header style={styles.header}>
-
         <div>
-          <h2 style={styles.title}>
-            👨‍🎓 Student Portal View
-          </h2>
-
-          <span style={styles.subtitle}>
-            Welcome, RVU Student
-          </span>
+          <h2 style={styles.title}>👨‍🎓 Student Portal View</h2>
+          <span style={styles.subtitle}>Welcome, RVU Student</span>
         </div>
 
-        <button
-          type="button"
-          onClick={onBackToHome}
-          style={styles.backBtn}
-        >
+        <button onClick={onBackToHome} style={styles.backBtn}>
           ← Back to Main Campus View
         </button>
-
       </header>
 
-      <PortalTabs
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
+      <div style={styles.tabContainer}>
+
+        <button
+          onClick={() => navigate('/student/notices')}
+          style={location.pathname.includes('/notices') || location.pathname === '/student' ? styles.activeTab : styles.tab}
+        >
+          Notices & Events
+        </button>
+
+        <button
+          onClick={() => navigate('/student/assignments')}
+          style={location.pathname.includes('/assignments') ? styles.activeTab : styles.tab}
+        >
+          Assignments
+        </button>
+
+        <button
+          onClick={() => navigate('/student/attendance')}
+          style={location.pathname.includes('/attendance') ? styles.activeTab : styles.tab}
+        >
+          Track Attendance
+        </button>
+
+        <button
+          onClick={() => navigate('/student/profile')}
+          style={location.pathname.includes('/profile') ? styles.activeTab : styles.tab}
+        >
+          Profile
+        </button>
+
+      </div>
 
       <div style={styles.contentCard}>
+        <Routes>
 
-        {activeTab === 'notices' && (
-          <NoticeList notices={notices} />
-        )}
+          <Route path="/" element={<NoticesView notices={notices} />} />
+          <Route path="notices" element={<NoticesView notices={notices} />} />
 
-        {activeTab === 'assignments' && (
-          <AssignmentList
-            assignments={assignments}
-            onSubmit={handleAssignmentSubmit}
+          <Route
+            path="assignments"
+            element={<AssignmentsView assignments={assignments} onSubmit={handleAssignmentSubmit} />}
           />
-        )}
 
-        {activeTab === 'attendance' && (
-  <div>
+          <Route path="attendance" element={<AttendanceView />} />
 
-    <h3>📊 Track Attendance</h3>
+          <Route path="profile" element={<ProfileView student={student} />} />
 
-    <div style={styles.attendanceCard}>
-      <strong>CS3202 - Deep Learning</strong>
-      <span style={styles.attendancePercent}>100%</span>
-    </div>
-
-    <div style={styles.attendanceCard}>
-      <strong>CS3255 - Natural Language Processing</strong>
-      <span style={styles.attendancePercent}>100%</span>
-    </div>
-
-    <div style={styles.attendanceCard}>
-      <strong>CS3301 - Full Stack Development</strong>
-      <span style={styles.attendancePercent}>100%</span>
-    </div>
-
-    <div style={styles.attendanceCard}>
-      <strong>CS3402 - Internet of Things</strong>
-      <span style={styles.attendancePercent}>100%</span>
-    </div>
-
-    <div style={styles.attendanceCard}>
-      <strong>CS3803 - Probability Theory</strong>
-      <span style={styles.attendancePercent}>85%</span>
-    </div>
-
-    <div style={styles.attendanceCard}>
-      <strong>Fintech BLOCKCHAIN</strong>
-      <span style={styles.attendancePercent}>95%</span>
-    </div>
-
-    <div style={styles.attendanceCard}>
-      <strong>Fintech Product Development</strong>
-      <span style={styles.attendancePercent}>100%</span>
-    </div>
-
-    <div style={styles.attendanceCard}>
-      <strong>HEALTH INFORMATICS</strong>
-      <span style={styles.attendancePercent}>100%</span>
-    </div>
-
-  </div>
-)}
-
-        {activeTab === 'profile' && (
-          <ProfileCard student={student} />
-        )}
-
+        </Routes>
       </div>
 
     </div>
   );
 }
 
-const styles = {
+function NoticesView({ notices }) {
+  return (
+    <div>
+      <h3>📢 Campus Notices & Events</h3>
 
+      <ul style={styles.list}>
+        {notices.map(item => (
+          <li key={item.id} style={styles.listItem}>
+            <div>
+              <strong>{item.title}</strong>
+              <p style={styles.subText}>{item.dept} • {item.date}</p>
+            </div>
+
+            <button style={styles.actionBtn}>View Details</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function AssignmentsView({ assignments, onSubmit }) {
+  return (
+    <div>
+      <h3>📝 Assignments & Submissions</h3>
+
+      <ul style={styles.list}>
+        {assignments.map(item => (
+          <li key={item.id} style={styles.listItem}>
+            <div>
+              <strong>{item.title}</strong>
+              <p style={styles.subText}>{item.subject} • Due: {item.dueDate}</p>
+            </div>
+
+            {item.status === 'Submitted' ? (
+              <span style={styles.badgeSuccess}>Submitted</span>
+            ) : (
+              <button style={styles.actionBtn} onClick={() => onSubmit(item.id)}>
+                Submit Assignment
+              </button>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function AttendanceView() {
+  const attendance = [
+    ['CS3202 - Deep Learning', '100%'],
+    ['CS3255 - Natural Language Processing', '100%'],
+    ['CS3301 - Full Stack Development', '100%'],
+    ['CS3402 - Internet of Things', '100%'],
+    ['CS3803 - Probability Theory', '85%'],
+    ['Fintech BLOCKCHAIN', '95%'],
+    ['Fintech Product Development', '100%'],
+    ['HEALTH INFORMATICS', '100%']
+  ];
+
+  return (
+    <div>
+      <h3>📊 Attendance Tracker</h3>
+
+      <div style={styles.grid}>
+        {attendance.map(([subject, percentage]) => (
+          <div style={styles.metricCard} key={subject}>
+            <h4>{subject}</h4>
+            <p style={styles.metricText}>{percentage} Attendance</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ProfileView({ student }) {
+  return (
+    <div>
+      <h3>👤 Student Profile</h3>
+
+      <div style={styles.profileCard}>
+        <img src={student.photo} alt="Student Profile" style={styles.profileImage} />
+        <p><strong>Name:</strong> {student.name}</p>
+        <p><strong>Student ID:</strong> {student.id}</p>
+        <p><strong>Programme:</strong> {student.programme}</p>
+        <p><strong>Department:</strong> {student.department}</p>
+        <p><strong>University:</strong> {student.university}</p>
+      </div>
+    </div>
+  );
+}
+
+const styles = {
   container: {
-    width: '90%',
     maxWidth: '850px',
     margin: '30px auto',
     fontFamily: 'Arial, sans-serif',
     backgroundColor: '#ffffff',
     borderRadius: '8px',
-    overflow: 'hidden',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+    overflow: 'hidden'
   },
 
   header: {
@@ -180,7 +210,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#0A2240',
     padding: '15px 20px',
-    color: '#ffffff'
+    color: '#fff'
   },
 
   title: {
@@ -197,35 +227,115 @@ const styles = {
     backgroundColor: '#F2A900',
     border: 'none',
     padding: '8px 14px',
+    fontWeight: 'bold',
     borderRadius: '4px',
     cursor: 'pointer',
-    fontWeight: 'bold',
     color: '#0A2240'
+  },
+
+  tabContainer: {
+    display: 'flex',
+    backgroundColor: '#e0e0e0',
+    borderBottom: '2px solid #0A2240'
+  },
+
+  tab: {
+    flex: 1,
+    padding: '12px',
+    border: 'none',
+    background: 'none',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    color: '#333'
+  },
+
+  activeTab: {
+    flex: 1,
+    padding: '12px',
+    border: 'none',
+    backgroundColor: '#ffffff',
+    color: '#0A2240',
+    fontWeight: 'bold',
+    borderTop: '3px solid #0A2240',
+    cursor: 'pointer'
   },
 
   contentCard: {
     backgroundColor: '#ffffff',
-    padding: '25px'
+    padding: '25px',
+    borderRadius: '0 0 8px 8px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
   },
 
-  attendanceCard: {
+  list: {
+    listStyle: 'none',
+    padding: 0
+  },
+
+  listItem: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '15px',
-    marginTop: '12px',
-    backgroundColor: '#f5f7fa',
-    borderRadius: '6px',
-    borderLeft: '4px solid #0A2240'
+    padding: '12px',
+    borderBottom: '1px solid #eee'
   },
 
-  onTrack: {
-    backgroundColor: '#28a745',
-    color: '#ffffff',
-    padding: '5px 10px',
-    borderRadius: '4px',
+  subText: {
+    margin: '4px 0 0 0',
     fontSize: '12px',
-    fontWeight: 'bold'
-  }
+    color: '#666'
+  },
 
+  actionBtn: {
+    backgroundColor: '#0A2240',
+    color: '#fff',
+    border: 'none',
+    padding: '6px 12px',
+    borderRadius: '4px',
+    cursor: 'pointer'
+  },
+
+  badgeSuccess: {
+    backgroundColor: '#28a745',
+    color: '#fff',
+    padding: '4px 8px',
+    borderRadius: '4px',
+    fontSize: '12px'
+  },
+
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '15px'
+  },
+
+  metricCard: {
+    border: '1px solid #ddd',
+    padding: '15px',
+    borderRadius: '6px',
+    textAlign: 'center'
+  },
+
+  metricText: {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: '#0A2240'
+  },
+
+  profileCard: {
+    textAlign: 'center',
+    lineHeight: '1.8',
+    backgroundColor: '#f5f7fa',
+    padding: '20px',
+    borderRadius: '6px'
+  },
+
+  profileImage: {
+    width: '110px',
+    height: '110px',
+    borderRadius: '50%',
+    objectFit: 'cover',
+    marginBottom: '15px',
+    border: '3px solid #0A2240'
+  }
 };

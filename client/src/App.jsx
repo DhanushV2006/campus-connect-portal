@@ -1,68 +1,26 @@
-import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import StudentPortal from './components/StudentPortal.jsx';
+import AuthModule from './components/AuthModule.jsx';
 
 export default function App() {
-
-  const studentPortalHashes = [
-    '#student',
-    '#notices',
-    '#assignments',
-    '#attendance',
-    '#profile'
-  ];
-
-  const [showStudentPortal, setShowStudentPortal] = useState(
-    studentPortalHashes.includes(window.location.hash)
-  );
-
-  useEffect(() => {
-
-    const handleHashChange = () => {
-      setShowStudentPortal(
-        studentPortalHashes.includes(window.location.hash)
-      );
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-
-  }, []);
-
-  useEffect(() => {
-
-    const siteContent = document.getElementById('site-content');
-    const staticStudentPortal = document.getElementById(
-      'static-student-portal'
-    );
-
-    if (siteContent) {
-      siteContent.style.display = showStudentPortal
-        ? 'none'
-        : 'block';
-    }
-
-    if (staticStudentPortal) {
-      staticStudentPortal.style.display = showStudentPortal
-        ? 'none'
-        : 'block';
-    }
-
-  }, [showStudentPortal]);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isStudentRoute = location.pathname.startsWith('/student');
 
   const handleBackToHome = () => {
+    navigate('/');
     window.location.hash = '';
   };
 
+  const siteContent = document.getElementById('site-content');
+  if (siteContent) siteContent.style.display = isStudentRoute ? 'none' : 'block';
+
   return (
-    <>
-      {showStudentPortal && (
-        <StudentPortal
-          onBackToHome={handleBackToHome}
-        />
-      )}
-    </>
+    <Routes>
+      <Route path="/login" element={<AuthModule initialMode="login" />} />
+      <Route path="/register" element={<AuthModule initialMode="register" />} />
+      <Route path="/student/*" element={<StudentPortal onBackToHome={handleBackToHome} />} />
+      <Route path="*" element={null} />
+    </Routes>
   );
 }
